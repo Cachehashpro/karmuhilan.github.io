@@ -1,0 +1,125 @@
+<!Doctype html>
+<html?\>
+<head>
+<title>Login page</title>
+<style>
+     .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .search-box {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+   .body{
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.code-box{
+        color: black;
+        border: 1px solid;
+        padding: 20px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-left: 500px;
+        margin-right: 500px;
+        padding-bottom: 50px;
+    }
+   
+</style>
+</head>
+<body background= "C:\Users\sreeh\Downloads\image.jpg"; style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" class=  " body code-box"  >
+    <h1 style="color: chartreuse;">LOGIN</h1>  
+    <label for="username" style="font-size: medium; padding: 10px;" >Username</label><br>
+    <input type="text" id="username" name="username"  placeholder= "username" maxlength="15"><br>
+   
+    <form id="passwordForm">
+        <div class="form-group">
+            <label for="password" style="padding: 10px">Password</label><br>
+            <input type="password" id="password" name="password" pattern="(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{16,}" placeholder="password">
+            <span class="error" id="passwordError"></span>
+        </div>
+       
+    </form>
+
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            var passwordInput = document.getElementById('password');
+            var passwordError = document.getElementById('passwordError');
+
+            var passwordPattern = new RegExp('(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@$!%?&])[A-Za-z\\d@$!%?&]{16,}');
+            if (!passwordPattern.test(passwordInput.value)) {
+                event.preventDefault();
+                passwordError.style.display = 'block';
+            } else {
+                passwordError.style.display = 'none';
+            }
+        });
+    </script>
+    <label for="gmail">Gmail</label><br>
+    <input type="email" id="gmail" name="gmail" pattern="[a-zA-Z0-9._%+-]+@gmail\.com" placeholder="Gmail" required><br>
+    <label type="date">Date of Birth</label><br>
+    <input type="date" id="regidtration date" name="registration date"><br>
+    <label type="file">upload your file</label><br>
+    <input type="file" id="file" style="text-align: center;" accept=".jpg, .jpeg, .png"><br>
+    <button type="submit" style="width: 250px; height: 30px;">login</button>
+</body> 
+<h2>Comments</h2>
+        <textarea id="comments" style="width: 400px; height: 100px;" name="comments" rows="4" placeholder="Enter your comments here..."></textarea><br>
+        <button type="button" onclick="submitComment()">Submit Comment</button><br>
+<div class="search-container">
+    <form action="/search" method="get">
+        <input type="text" name="query" class="search-box" placeholder="Search..."><br>
+        <button type="submit" class="search-button">Search</button>
+     </form>
+</div>
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let query = document.getElementById('query').value.trim();
+        let resultsDiv = document.getElementById('results');
+        
+        // Simulating search results
+        let availableResults = ["apple", "banana", "cherry", "date", "fig"];
+        resultsDiv.innerHTML = '';
+
+        if (query) {
+            let searchResult = availableResults.filter(item => item.includes(query));
+            
+            if (searchResult.length > 0) {
+                searchResult.forEach(item => {
+                    let p = document.createElement('p');
+                    p.textContent = item;
+                    resultsDiv.appendChild(p);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p>No results found</p>';
+            }
+        } else {
+            resultsDiv.innerHTML = '<p>Please enter a search query</p>';
+        }
+    });
+</script>
+<form action="submit-form.php" method="POST" enctype="multipart/form-data">
+    <!-- form fields here -->
+</form>
+</html>
